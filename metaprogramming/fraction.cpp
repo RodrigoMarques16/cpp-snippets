@@ -2,7 +2,7 @@
 #include <iostream>
 
 // 1. constexpr function ///////////////////
-// can't partially specialize function templates so at least I can't do better than this
+// can't partially specialize templatized functions so at least I can't do better than this
 template <int N, int D> struct Fraction1 {};
 template <int S, int N, int D> constexpr auto scalar1() noexcept -> Fraction1<S*N, S*D> {};
 
@@ -24,7 +24,7 @@ struct scale {};
 
 template <int S, template<int, int> typename F, int N, int D> 
 struct scale<S, F<N, D>> {
-    typedef frak<S*F<N,D>::Num, S*F<N,D>::Den> result;
+    typedef Fraction2<S*F<N,D>::Num, S*F<N,D>::Den> result;
 };
 
 int main() {
