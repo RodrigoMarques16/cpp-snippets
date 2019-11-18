@@ -2,7 +2,7 @@
 #include <chrono>
 #include <thread>
 
-auto memoize(auto f) {
+auto const memoize(auto f) {
     return [f](auto... args) {
         using return_type = decltype(f(args...));
         static return_type value{};
@@ -13,7 +13,7 @@ auto memoize(auto f) {
 }
 
 int main() {
-    auto timesTwo = memoize([](int x){
+    auto const timesTwo = memoize([](int x){
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         return x * 2;
     });
